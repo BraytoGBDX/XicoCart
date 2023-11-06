@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String barcode=(String) lvProducts.getItemAtPosition(i);
-                Intent intent=new Intent(MainActivity.this,ProductDetail.class);
+                Intent intent=new Intent(MainActivity.this,HomeActivity.class);
                 intent.putExtra("barcode",barcode);
                 startActivity(intent);
             }
