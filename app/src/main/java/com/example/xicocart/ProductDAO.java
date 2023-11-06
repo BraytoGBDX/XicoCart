@@ -86,4 +86,30 @@ public class ProductDAO {
         cursor.close();
         return result;
     }
+
+    public boolean updateProduct(Product product) {
+        boolean result = false;
+        db = dbHelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(GroceriesContract.Product.COLUMN_NAME_DESCRIPTION, product.getDescription());
+        values.put(GroceriesContract.Product.COLUMN_NAME_BRAND, product.getBrand());
+        values.put(GroceriesContract.Product.COLUMN_NAME_COST, product.getCost());
+        values.put(GroceriesContract.Product.COLUMN_NAME_PRICE, product.getPrice());
+        values.put(GroceriesContract.Product.COLUMN_NAME_STOCK, product.getStock());
+
+        String whereClause = GroceriesContract.Product.COLUMN_NAME_BARCODE + " = ?";
+        String[] whereArgs = {product.getBarcode()};
+
+        int rowsUpdated = db.update(GroceriesContract.Product.TABLE_NAME, values, whereClause, whereArgs);
+
+        if (rowsUpdated > 0) {
+            result = true;
+        }
+
+        return result;
+    }
+
+
+
 }
