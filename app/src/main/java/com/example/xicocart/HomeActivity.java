@@ -30,29 +30,21 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         buttonUpdate = findViewById(R.id.btn_update);
-
         buttonUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                // Obtén los datos de los campos de texto
+            public void onClick(View view) {
                 String newDescription = txtDescription.getText().toString();
                 String newBrand = txtBrand.getText().toString();
                 float newCost = Float.parseFloat(txtCost.getText().toString());
                 float newPrice = Float.parseFloat(txtPrice.getText().toString());
                 int newStock = Integer.parseInt(txtStock.getText().toString());
-
-                // Actualiza los datos del producto
                 if (product != null) {
                     product.setDescription(newDescription);
                     product.setBrand(newBrand);
                     product.setCost(newCost);
                     product.setPrice(newPrice);
                     product.setStock(newStock);
-
-                    // Llama al método de actualización en el DAO
                     productDAO.updateProduct(product);
-
-                    // Notifica al usuario que la actualización se realizó correctamente
                     Toast.makeText(HomeActivity.this, "Producto actualizado", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -65,7 +57,6 @@ public class HomeActivity extends AppCompatActivity {
         txtCost=findViewById(R.id.txt_cost);
         txtPrice=findViewById(R.id.txt_price);
         txtStock=findViewById(R.id.txt_stock);
-        buttonUpdate=findViewById(R.id.btn_update);
         buttonDelete=findViewById(R.id.btn_delete);
         String barcode=getIntent().getExtras().getString("barcode");
         productDAO=new ProductDAO(this);

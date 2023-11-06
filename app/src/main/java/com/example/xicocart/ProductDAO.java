@@ -98,12 +98,16 @@ public class ProductDAO {
         values.put(GroceriesContract.Product.COLUMN_NAME_PRICE, product.getPrice());
         values.put(GroceriesContract.Product.COLUMN_NAME_STOCK, product.getStock());
 
-        String whereClause = GroceriesContract.Product.COLUMN_NAME_BARCODE + " = ?";
-        String[] whereArgs = {product.getBarcode()};
+        String selection = GroceriesContract.Product.COLUMN_NAME_BARCODE + " = ?";
+        String[] selectionArgs = {product.getBarcode()};
 
-        int rowsUpdated = db.update(GroceriesContract.Product.TABLE_NAME, values, whereClause, whereArgs);
+        int count = db.update(
+                GroceriesContract.Product.TABLE_NAME,
+                values,
+                selection,
+                selectionArgs);
 
-        if (rowsUpdated > 0) {
+        if (count > 0) {
             result = true;
         }
 
